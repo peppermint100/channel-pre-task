@@ -1,9 +1,11 @@
 import { combineReducers } from "redux"; 
 import CountryReducer from "./CountryReducer";
-import FilteredSearchTextReducer from "./FilteredSearchTextReducer";
+import SearchBarTextReducer from "./SearchBarTextReducer";
+import FilteredCountryReducer from "./FilteredCountryReducer";
 
 export const RootReducer = combineReducers({
     CountryReducer,
-    FilteredSearchTextReducer
+    SearchBarTextReducer,
+    FilteredCountryReducer
 });
 export type RootReducerType = ReturnType<typeof RootReducer>; 

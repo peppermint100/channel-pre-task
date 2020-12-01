@@ -7,4 +7,4 @@ export const setSearchBarText = (payload: string) => ({
 
 type setSearchBarTextType = ReturnType<typeof setSearchBarText>;
 
-export type FilteredSearchTextActionType = setSearchBarTextType;
+export type SearchBarTextActionsType = setSearchBarTextType;

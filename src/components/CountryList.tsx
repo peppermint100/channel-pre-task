@@ -1,25 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components';
 import { requestCountryData } from '../redux/actions/CountryActions';
+import { setSearchBarText } from '../redux/actions/SearchBarTextActions';
 import { RootReducerType } from '../redux/reducers/RootReducer'
 import CountryDataType from '../types/CountryDataType';
 
 const CountryList = () => {
     const dispatch = useDispatch();
-    const countryData: Array<CountryDataType> = useSelector((state: RootReducerType) => state.CountryReducer);
+    const filterCountries: Array<CountryDataType> | undefined = useSelector((state: RootReducerType) => state.FilteredCountryReducer);
 
     const getData = () => {
-        dispatch(requestCountryData());
+        dispatch(setSearchBarText(""));
     }
+
+    useEffect(() => {
+        dispatch(requestCountryData());
+    }, [])
 
     return (
         <Container>
             {
-                !countryData ? <CustomButton onClick={getData}>데이터 불러오기</CustomButton>
+                !filterCountries.length ? <CustomButton onClick={getData}>데이터 불러오기</CustomButton>
                 : (
                     <Unordered>
-                        { countryData.map((data) => (
+                        { filterCountries.map((data) => (
                             <Card key={data.alpha2Code}>
                                 <HeaderText>{data.name}, {data.alpha2Code}</HeaderText>
                                 <p>calling code : +{data.callingCodes}</p>

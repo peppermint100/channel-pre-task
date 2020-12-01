@@ -13,14 +13,10 @@ export const receiveCountryData = (payload: CountryDataType) => ({
     payload
 })
 
-export const filterCountryData = (payload: string) => ({
-    type: FILTER_COUNTRY_DATA,
-    payload
-})
+
 
 //return type of actions
 type RequestCountryDataType = ReturnType<typeof requestCountryData>;
 type ReceiveCountryDataType = ReturnType<typeof receiveCountryData>;
-type FilterCountryDataType = ReturnType<typeof filterCountryData>;
 
-export type CountryActionsType = RequestCountryDataType | ReceiveCountryDataType | FilterCountryDataType;
+export type CountryActionsType = RequestCountryDataType | ReceiveCountryDataType; 

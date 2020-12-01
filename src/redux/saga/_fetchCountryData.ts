@@ -1,5 +1,6 @@
 import { call, put } from "redux-saga/effects";
 import { receiveCountryData } from "../actions/CountryActions";
+import { filteredCountryData } from "../actions/FilteredCountryActions";
 import getData from "./../../api";
 
 export function* _fetchCountryData(){
@@ -8,4 +9,5 @@ export function* _fetchCountryData(){
 
     // reducer call
     yield put(receiveCountryData(data));
+    yield put(filteredCountryData(data));
 }
