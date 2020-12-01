@@ -4,7 +4,7 @@ Channel Co. Pre-Task
 ## Requirement
 - [x] react, webpack을 베이스로 사용하여 개발
 - [x] 보일러 플레이트(create-react-app 등)를 사용하지 않아야 함.
-- [ ] 검색 창이 있어 통합 검색이 되어야 함. (Case insensitive, 부분일치)
+- [x] 검색 창이 있어 통합 검색이 되어야 함. (Case insensitive, 부분일치)
 - [ ] 버튼을 누르면 각 필드별 오름차순, 내림차순 정렬이 되어야 함.
 - [ ] 각 나라의 데이터 Row에 삭제 버튼이 있어 누르면 삭제되어야 함.
 - [ ] 나라 정보를 입력해서 Row를 추가할 수 있어야 함.

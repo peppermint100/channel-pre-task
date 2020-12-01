@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CountryList from "./components/CountryList";
+import OrderCaseControlBar from "./components/OrderCaseControlBar";
 import SearchBar from "./components/SearchBar";
 import GlobalStyle from "./GlobalStyle";
 
@@ -12,6 +13,7 @@ const App:React.FC = () => {
             <Header>Channel Co. Pre Task</Header>
             <Main>
                 <SearchBar />
+                <OrderCaseControlBar />
                 <CountryList />
             </Main>
         </div>
