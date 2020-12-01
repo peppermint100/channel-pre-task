@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Field, Formik } from "formik";
 import { useDispatch } from 'react-redux';
-import { RootReducerType } from '../redux/reducers/RootReducer';
+import { filterCountryData } from '../redux/actions/CountryActions';
 
 const SearchBar = () => {
     const dispatch = useDispatch();
-    const filteredSearchText = useSelector((state: RootReducerType) => state.FilteredSearchTextReducer);
+
+    useEffect(() => {
+
+    })
 
     return (
         <div>
-            <TextInput />
             <Formik initialValues={{ searchText: "" }} onSubmit={( data, { setSubmitting }) => {
                 setSubmitting(true);
                 setSubmitting(false);
@@ -20,7 +22,8 @@ const SearchBar = () => {
                     name="searchText"
                     type="text"
                     onChange={(e:any) => {
-                        
+                        console.log(e.target.value);
+                        dispatch(filterCountryData(e.target.value));
                     }}
                 />
 

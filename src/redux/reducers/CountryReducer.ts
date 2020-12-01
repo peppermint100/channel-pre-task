@@ -1,15 +1,25 @@
 import CountryDataType from "../../types/CountryDataType";
-import { CountryActionsType } from "../actions/CountryActions";
+import { CountryActionsType, FILTER_COUNTRY_DATA } from "../actions/CountryActions";
 import { RECEIVE_COUNTRY_DATA } from "./../actions/CountryActions";
 
 const initialState = null;
 
-// triggered by saga
 const CountryReducer = (state:Array<CountryDataType> | null = initialState, action: CountryActionsType) => {
-    if(action.type === RECEIVE_COUNTRY_DATA){
-        return action.payload;
-    }else{
-        return state;
+    // triggered by saga
+
+    switch(action.type){
+        case RECEIVE_COUNTRY_DATA:
+            return action.payload;
+        case FILTER_COUNTRY_DATA:
+            const target = action.payload.toLowerCase();
+            
+            const filteredCountries = state?.filter( (country:CountryDataType) => (
+                country.name.toLowerCase().includes(target)
+            ))
+
+            return filteredCountries;
+        default:
+            return state;
     }
 }
 
