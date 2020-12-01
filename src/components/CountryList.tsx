@@ -1,18 +1,35 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components';
+import { requestCountryData } from '../redux/actions/CountryActions';
 import { RootReducerType } from '../redux/reducers/RootReducer'
+import CountryDataType from '../types/CountryDataType';
 
 const CountryList = () => {
-    const countryData = useSelector((state: RootReducerType) => state.CountryReducer);
+    const dispatch = useDispatch();
+    const countryData: Array<CountryDataType> = useSelector((state: RootReducerType) => state.CountryReducer);
 
     const getData = () => {
-        
+        dispatch(requestCountryData());
     }
 
     return (
         <Container>
-            <CustomButton onClick={getData}>데이터 불러오기</CustomButton>
+            {
+                !countryData ? <CustomButton onClick={getData}>데이터 불러오기</CustomButton>
+                : (
+                    <Unordered>
+                        { countryData.map((data) => (
+                            <Card key={data.alpha2Code}>
+                                <HeaderText>{data.name}, {data.alpha2Code}</HeaderText>
+                                <p>calling code : +{data.callingCodes}</p>
+                                <p>capital : {data.capital}</p>
+                                <p>region : {data.region}</p>
+                            </Card>
+                        )) }
+                    </Unordered>
+                )
+            }
         </Container>
     )
 }
@@ -30,6 +47,25 @@ const CustomButton = styled.button`
     &:hover {
         opacity: .7;
     }
+`
+
+const Unordered = styled.ul`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+const Card = styled.li`
+    width: 300px;
+    min-height: 120px;
+    margin: 20px;
+    border: 2px solid #bdc3c7;
+    text-align: center;
+`
+
+const HeaderText = styled.p`
+    font-size: 18px;
+    font-weight: 700;
 `
 
 export default CountryList

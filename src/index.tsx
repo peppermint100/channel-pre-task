@@ -12,6 +12,10 @@ const store = createStore(RootReducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(mySaga);
 
+store.subscribe(() => {
+    console.log(store.getState());
+})
+
 ReactDOM.render(
     <Provider store={store}>
         <App />
