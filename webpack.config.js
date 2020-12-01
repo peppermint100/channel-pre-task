@@ -1,5 +1,6 @@
 const path = require("path");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -35,6 +36,7 @@ module.exports = {
         files: "./src/**/*",
       },
     }),
+    new webpack.EvalSourceMapDevToolPlugin({})
   ],
   devServer: {
     contentBase: path.join(__dirname, "build"),

@@ -18,7 +18,6 @@ const SearchBar = () => {
                     name="searchText"
                     type="text"
                     onChange={(e:any) => {
-                        console.log(e.target.value);
                         dispatch(setSearchBarText(e.target.value));
                     }}
                 />
