@@ -5,9 +5,10 @@ import { SET_ORDER_CASE } from "../actions/OrderCaseAction";
 import { SET_SEARCH_BAR_TEXT } from "../actions/SearchBarTextActions";
 import { _fetchCountryData } from "./_fetchCountryData";
 import { _filterCountryData } from "./_filterCountryData";
+import { _changeOrderState } from "./_changeOrderState";
 
 export default function* mySaga() {
     yield takeLatest(REQUEST_COUNTRY_DATA, _fetchCountryData);
     yield takeEvery(SET_SEARCH_BAR_TEXT as unknown as TakeableChannel<unknown>, _filterCountryData);
-    yield takeLatest(SET_ORDER_CASE as unknown as TakeableChannel<unknown>, _changeOrderCase);
+    yield takeEvery(SET_ORDER_CASE as unknown as TakeableChannel<unknown>, _changeOrderState);
 }

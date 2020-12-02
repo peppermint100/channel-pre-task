@@ -28,6 +28,7 @@ const Container = styled.button<StyledProps>`
     color: #fff;
     transition: background-color .3s ease-in-out;
     border-radius: 4px;
+    cursor: pointer;
     &:hover{
         background-color: #e74c3c;
     }
