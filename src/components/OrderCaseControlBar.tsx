@@ -19,10 +19,6 @@ const OrderCaseControlBar = () => {
     const dispatch = useDispatch();
     const currentOrderCase = useSelector((state: RootReducerType) => state.OrderCaseReducer);
 
-    React.useEffect(() => {
-        console.log(currentOrderCase);
-    })
-
     return (
         <div style={{ marginTop: "30px"}}>
             <ul>

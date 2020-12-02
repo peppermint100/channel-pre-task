@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { Field, Formik } from "formik";
 import { useDispatch } from 'react-redux';
 import { setSearchBarText } from '../redux/actions/SearchBarTextActions';
+import _ from "lodash";
 
 const SearchBar = () => {
     const dispatch = useDispatch();
+
+    // to prevent _.debounce being fired from every time when the input value's state
+    const debounce = useCallback(
+        _.debounce((text: string) => {
+        dispatch(setSearchBarText(text));
+        }, 1000),
+        [setSearchBarText]
+    );
 
     return (
         <div>
@@ -17,8 +26,8 @@ const SearchBar = () => {
                     component={TextInput}
                     name="searchText"
                     type="text"
-                    onChange={(e:any) => {
-                        dispatch(setSearchBarText(e.target.value));
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        debounce(e.target.value);
                     }}
                 />
 
