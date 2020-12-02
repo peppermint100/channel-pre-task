@@ -1,6 +1,6 @@
 import CountryDataType from "../../types/CountryDataType";
 import OrderCaseType from "../../types/OrderCaseType";
-import { CHANGE_ORDER_CASE_COUNTRY_DATA, FILTERED_COUNTRY_DATA, FitleredCountryActionsType } from "../actions/FilteredCountryActions";
+import { CHANGE_ORDER_CASE_COUNTRY_DATA, DELETE_COUNTRY_DATA, FILTERED_COUNTRY_DATA, FitleredCountryActionsType } from "../actions/FilteredCountryActions";
 
 const intialState: Array<CountryDataType> = [];
 
@@ -11,7 +11,7 @@ const FilteredCountryReducer = (state: Array<CountryDataType> = intialState, act
         case CHANGE_ORDER_CASE_COUNTRY_DATA:
 
             const orderCase = action.payload;
-            const originalState = action.originalState;
+            // const originalState = action.originalState;
 
             let orderedState: Array<CountryDataType> = state.slice();
             switch(orderCase){
@@ -86,11 +86,25 @@ const FilteredCountryReducer = (state: Array<CountryDataType> = intialState, act
                     });
                     break;
                 case OrderCaseType.NULL:
-                    orderedState = originalState;
+                    // orderState = originalState;
+                    orderedState = state;
                     break;
             }
           
             return orderedState;
+
+        case DELETE_COUNTRY_DATA:
+            const target = action.payload;
+            const updatedState = state.slice().filter((country) => {
+                if(target === country.alpha2Code){
+                    console.log(country);
+                }
+                return country.alpha2Code !== target;
+            });
+
+            console.log(updatedState);
+
+            return updatedState;
 
         default:
             return state;

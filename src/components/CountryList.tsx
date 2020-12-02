@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components';
 import { requestCountryData } from '../redux/actions/CountryActions';
+import { deleteCountryData } from '../redux/actions/FilteredCountryActions';
 import { setSearchBarText } from '../redux/actions/SearchBarTextActions';
 import { RootReducerType } from '../redux/reducers/RootReducer'
 import CountryDataType from '../types/CountryDataType';
@@ -12,6 +13,11 @@ const CountryList = () => {
 
     const getData = () => {
         dispatch(setSearchBarText(""));
+    }
+
+    const deleteCountry = (code: string) => {
+        // delete action
+        dispatch(deleteCountryData(code));
     }
 
     useEffect(() => {
@@ -30,6 +36,7 @@ const CountryList = () => {
                                 <p>calling code : +{data.callingCodes}</p>
                                 <p>capital : {data.capital}</p>
                                 <p>region : {data.region}</p>
+                                <DeleteButton onClick={() => {deleteCountry(data.alpha2Code)}}>Delete</DeleteButton>
                             </Card>
                         )) }
                     </Unordered>
@@ -71,6 +78,21 @@ const Card = styled.li`
 const HeaderText = styled.p`
     font-size: 18px;
     font-weight: 700;
+`
+
+const DeleteButton = styled.button`
+    margin: 10px;
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    color: #fff;
+    background-color: #e74c3c;
+    transition: opacity .3s ease; 
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover{
+        opacity: .8;
+    }
 `
 
 export default CountryList
