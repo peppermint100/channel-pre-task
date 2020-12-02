@@ -1,10 +1,12 @@
 import CountryDataType from "../../types/CountryDataType";
 import OrderCaseType from "../../types/OrderCaseType";
-import { CHANGE_ORDER_CASE_COUNTRY_DATA, DELETE_COUNTRY_DATA, FILTERED_COUNTRY_DATA, FitleredCountryActionsType } from "../actions/FilteredCountryActions";
+import { ADD_COUNTRY_DATA, CHANGE_ORDER_CASE_COUNTRY_DATA, DELETE_COUNTRY_DATA, FILTERED_COUNTRY_DATA, FitleredCountryActionsType } from "../actions/FilteredCountryActions";
 
 const intialState: Array<CountryDataType> = [];
 
 const FilteredCountryReducer = (state: Array<CountryDataType> = intialState, action: FitleredCountryActionsType) => {
+    let updatedState: Array<CountryDataType> = state.slice();
+
     switch(action.type){
         case FILTERED_COUNTRY_DATA:
             return action.payload;
@@ -12,11 +14,9 @@ const FilteredCountryReducer = (state: Array<CountryDataType> = intialState, act
 
             const orderCase = action.payload;
             // const originalState = action.originalState;
-
-            let orderedState: Array<CountryDataType> = state.slice();
             switch(orderCase){
                 case OrderCaseType.NAME:
-                    orderedState = orderedState.sort((a, b) => {
+                    updatedState = updatedState.sort((a, b) => {
                         const fa = a.name.toLowerCase(),
                             fb = b.name.toLowerCase();
 
@@ -30,7 +30,7 @@ const FilteredCountryReducer = (state: Array<CountryDataType> = intialState, act
                     });
                     break;
                 case OrderCaseType.ALPHA_CODE:
-                    orderedState = orderedState.sort((a, b) => {
+                    updatedState = updatedState.sort((a, b) => {
                         const fa = a.alpha2Code.toLowerCase(),
                             fb = b.alpha2Code.toLowerCase();
 
@@ -44,7 +44,7 @@ const FilteredCountryReducer = (state: Array<CountryDataType> = intialState, act
                     });
                     break;
                 case OrderCaseType.CALLING_CODE:
-                    orderedState = orderedState.sort((a, b) => {
+                    updatedState = updatedState.sort((a, b) => {
                         const fa = a.callingCodes[0].toLowerCase(),
                             fb = b.callingCodes[0].toLowerCase();
 
@@ -58,7 +58,7 @@ const FilteredCountryReducer = (state: Array<CountryDataType> = intialState, act
                     });
                     break;
                 case OrderCaseType.CAPITAL:
-                    orderedState = orderedState.sort((a, b) => {
+                    updatedState = updatedState.sort((a, b) => {
                         const fa = a.capital.toLowerCase(),
                             fb = b.capital.toLowerCase();
 
@@ -72,7 +72,7 @@ const FilteredCountryReducer = (state: Array<CountryDataType> = intialState, act
                     });
                     break;
                 case OrderCaseType.REGION:
-                    orderedState = orderedState.sort((a, b) => {
+                    updatedState = updatedState.sort((a, b) => {
                         const fa = a.region.toLowerCase(),
                             fb = b.region.toLowerCase();
 
@@ -87,25 +87,27 @@ const FilteredCountryReducer = (state: Array<CountryDataType> = intialState, act
                     break;
                 case OrderCaseType.NULL:
                     // orderState = originalState;
-                    orderedState = state;
+                    updatedState = state;
                     break;
             }
           
-            return orderedState;
+            return updatedState;
 
         case DELETE_COUNTRY_DATA:
             const target = action.payload;
-            const updatedState = state.slice().filter((country) => {
-                if(target === country.alpha2Code){
-                    console.log(country);
-                }
+
+            updatedState = updatedState.filter((country) => {
                 return country.alpha2Code !== target;
             });
 
-            console.log(updatedState);
-
             return updatedState;
 
+        case ADD_COUNTRY_DATA:
+            const countryToAdd = action.payload;
+            
+            updatedState = [countryToAdd, ...updatedState];
+
+            return updatedState;
         default:
             return state;
     }

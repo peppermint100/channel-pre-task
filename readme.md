@@ -6,7 +6,7 @@ Channel Co. Pre-Task
 - [x] 보일러 플레이트(create-react-app 등)를 사용하지 않아야 함.
 - [x] 검색 창이 있어 통합 검색이 되어야 함. (Case insensitive, 부분일치)
 - [x] 버튼을 누르면 각 필드별 오름차순, 내림차순 정렬이 되어야 함.
-- [ ] 각 나라의 데이터 Row에 삭제 버튼이 있어 누르면 삭제되어야 함.
+- [x] 각 나라의 데이터 Row에 삭제 버튼이 있어 누르면 삭제되어야 함.
 - [ ] 나라 정보를 입력해서 Row를 추가할 수 있어야 함.
 - [ ] 모든 상태(나라 목록, 정렬 상태, 검색어 등)는 데이터 관리 라이브러리(Redux, MobX 등)에 저장되어야 함.
 - [ ] Network 통신은 redux middleware를 통해 되어야 함.
@@ -32,6 +32,8 @@ Channel Co. Pre-Task
 - react-redux
 - redux-saga
 - styled-components
- 
 
-
+## Things I Learned
+- put extra words in front of every single dispatch action to sort out of normal react functions
+- remember not to mutate state in redux
+-  
