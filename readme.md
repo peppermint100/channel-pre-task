@@ -36,4 +36,76 @@ Channel Co. Pre-Task
 ## Things I Learned
 - need to put extra words in front of every single dispatch action to sort out of normal react functions
 - remember not to mutate state in redux
--  
+
+## API Data State Management
+![img1](./img/img1.PNG) 
+
+1. Trigger Request Action in Application
+2. Saga takes Actions then trigger saga function that calls API
+3. Put fetched API Data in another store
+4. Create and store another deep copied data to filter, search, order
+
+## Copied Data
+ Trying to find matching data directly cause a problem, which happens when user delete or change input value. because redux store lose original API Data(contains whole data). so I needed to store original data in another redux state, then create filtered data state for computing different filter options.
+
+![img2](./img/img2.PNG)
+
+
+ ## Debouncing
+ used lodash library
+
+ ```tsx
+ // input field
+<Field
+    component={TextInput}
+    name="searchText"
+    type="text"
+    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        debounce(e.target.value);
+    }}
+/>
+
+// debounce
+const debounce = useCallback(
+    _.debounce((text: string) => {
+    dispatch(setSearchBarText(text));
+    }, 1000),
+    []
+);
+ ```
+
+reason that I use `useCallback` here is when input value changes, state get updated. that leads applications to re-render again. which means re-defining whole functions in this component. so if we code debounce like this
+
+```tsx
+<Field
+    component={TextInput}
+    name="searchText"
+    type="text"
+    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        _.debounce((text: string) => {
+            dispatch(setSearchBarText(text));
+        }, 1000)
+    }}
+/>
+
+```
+
+it won't work. because original debounce lost it's reference. so I needed to memoize debounce function with `useCallback`
+
+## Infinite Scroll
+- memoize observer, `lastItemRef` with `useRef`, `useCallback`
+- calculate last item in list with simple algorithm
+- if observer reaches to last item
+- change state of last item scope
+
+## Improvable Points
+- Better UI/UX design
+- With limited showing data in `CountryLIst` component, I don't think I really have to compute whole data of the API. 
+- cross browsing
+
+
+
+
+
+
+
