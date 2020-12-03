@@ -1,5 +1,5 @@
 import CountryDataType from "../../types/CountryDataType";
-import { CountryActionsType, FILTER_COUNTRY_DATA } from "../actions/CountryActions";
+import { CountryActionsType } from "../actions/CountryActions";
 import { RECEIVE_COUNTRY_DATA } from "./../actions/CountryActions";
 
 const initialState = null;

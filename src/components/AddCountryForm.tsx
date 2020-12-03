@@ -5,17 +5,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import CountryDataType from '../types/CountryDataType';
 import { addCountryData } from '../redux/actions/FilteredCountryActions';
 import { RootReducerType } from '../redux/reducers/RootReducer';
+import { setModalState } from '../redux/actions/ModalActions';
 
 const AddCountryForm:React.FC = () => {
 
     const dispatch = useDispatch();
     const filteredCountryData: Array<CountryDataType> = useSelector((state: RootReducerType) => state.FilteredCountryReducer);
+    const isShowing = useSelector((state: RootReducerType) => state.ModalReducer);
+
+    if(!isShowing){
+        return null;
+    }else{
     return (
         <Container>
             <Formik initialValues={{name: "", alpha2Code: "", callingCodes: "", capital: "", region: "" }} onSubmit={(data, {setSubmitting}) => {
                 setSubmitting(true);
+                setModalState(false);
                 const { name, alpha2Code, callingCodes, capital, region } = data;
-                console.log(name, alpha2Code, callingCodes, capital, region);
                 let hasAlready = false;
                 if(!name || !alpha2Code || !callingCodes || !capital || !region){
                     window.alert("Fill all blanks");
@@ -100,17 +106,19 @@ const AddCountryForm:React.FC = () => {
                 
             </Formik>
         </Container>
-    )
+        )
+    }
 }
 
 const Container = styled.div`
     width: 400px;
     height: 600px;
-    background: linear-gradient(180deg, #27ae60, #2ecc71);
     position: fixed;
     top: 15%;
-    right: 7%;
+    border: 2px solid #e67e22;
     border-radius: 10px;
+    background-color: #fff;
+    z-index: 100;
 `
 
 const FormContainer = styled.form`
@@ -136,14 +144,13 @@ const AddButton = styled.button`
 const TextInput = styled.input`
     width: 300px;
     height: 35px;
-    border: 2px solid #fff;
-    color: #fff;
+    border: 2px solid #e67e22;
     border-radius: 3px;
     margin: 20px;
 `
 
 const Label = styled.label`
-    color: #fff;
+    color: #e67e22;
     align-self: flex-start;
     transform: translate(50px, 15px);
 `

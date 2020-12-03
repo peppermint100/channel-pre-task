@@ -4,7 +4,7 @@ import { ADD_COUNTRY_DATA, CHANGE_DSC_ORDER_CASE_COUNTRY_DATA, CHANGE_ASC_ORDER_
 
 const intialState: Array<CountryDataType> = [];
 
-const FilteredCountryReducer = (state: Array<CountryDataType> = intialState, action: FitleredCountryActionsType) => {
+const FilteredCountryReducer = (state: Array<CountryDataType> = intialState, action: FitleredCountryActionsType): Array<CountryDataType> => {
     let updatedState: Array<CountryDataType> = state.slice();
 
     switch(action.type){
