@@ -6,7 +6,7 @@ import CountryDataType from '../types/CountryDataType';
 import { addCountryData } from '../redux/actions/FilteredCountryActions';
 import { RootReducerType } from '../redux/reducers/RootReducer';
 
-const AddCountryForm = () => {
+const AddCountryForm:React.FC = () => {
 
     const dispatch = useDispatch();
     const filteredCountryData: Array<CountryDataType> = useSelector((state: RootReducerType) => state.FilteredCountryReducer);

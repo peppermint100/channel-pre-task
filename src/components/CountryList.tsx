@@ -1,4 +1,3 @@
-import { entries } from 'lodash';
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components';
@@ -8,7 +7,7 @@ import { setSearchBarText } from '../redux/actions/SearchBarTextActions';
 import { RootReducerType } from '../redux/reducers/RootReducer'
 import CountryDataType from '../types/CountryDataType';
 
-const CountryList = () => {
+const CountryList:React.FC = () => {
     const dispatch = useDispatch();
     const filterCountries: Array<CountryDataType> | undefined = useSelector((state: RootReducerType) => state.FilteredCountryReducer);
 
@@ -19,8 +18,9 @@ const CountryList = () => {
 
     const lastItemRef = useCallback( node => {
         if(observer.current) observer.current.disconnect();
+
         observer.current = new IntersectionObserver( entries => {
-            if( entries[0].isIntersecting){
+            if(entries[0].isIntersecting){
                 setCurrentLastIndex( current => current + 10);
             }
         })
@@ -93,7 +93,7 @@ const CustomButton = styled.button`
 `
 
 const Unordered = styled.ul`
-    display: flex;
+    display: flex; 
     flex-direction: column;
     align-items: center;
 `

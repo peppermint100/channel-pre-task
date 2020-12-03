@@ -1,12 +1,12 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { setOrderCase } from '../redux/actions/OrderCaseAction';
+import { setAscOrderCase, setDscOrderCase } from '../redux/actions/OrderCaseAction';
 import { RootReducerType } from '../redux/reducers/RootReducer';
 import OrderCaseType from '../types/OrderCaseType';
 import OrderCaseSwitchButton from './OrderCaseSwitchButton';
 
-const OrderCaseControlBar = () => {
+const OrderCaseControlBar:React.FC = () => {
 
     const orderCaseList = [
         OrderCaseType.NAME,
@@ -27,9 +27,9 @@ const OrderCaseControlBar = () => {
                         <ListProp key={c}>
                             <OrderCaseSwitchButton onClick={() => {
                                 if(currentOrderCase === c){
-                                    dispatch(setOrderCase(OrderCaseType.NULL));
+                                    dispatch(setAscOrderCase(c));
                                 }else{
-                                    dispatch(setOrderCase(c));
+                                    dispatch(setDscOrderCase(c));
                                 }
                             }} current={currentOrderCase} orderCase={c} />
                         </ListProp>

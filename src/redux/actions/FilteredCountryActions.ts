@@ -2,7 +2,8 @@ import CountryDataType from "../../types/CountryDataType";
 import OrderCaseType from "../../types/OrderCaseType";
 
 export const FILTERED_COUNTRY_DATA = "TRIGGER_FILTER_COUNTRY_DATA" as const;
-export const CHANGE_ORDER_CASE_COUNTRY_DATA = "CHANGE_ORDER_CASE_COUNTRY_DATA" as const;
+export const CHANGE_DSC_ORDER_CASE_COUNTRY_DATA = "CHANGE_DSC_ORDER_CASE_COUNTRY_DATA" as const;
+export const CHANGE_ASC_ORDER_CASE_COUNTRY_DATA = "CHANGE_ASC_ORDER_CASE_COUNTRY_DATA" as const;
 export const DELETE_COUNTRY_DATA = "DELETE_COUNTRY_DATA" as const;
 export const ADD_COUNTRY_DATA = "ADD_COUNTRY_DATA" as const;
 
@@ -12,8 +13,14 @@ export const filteredCountryData = (payload: Array<CountryDataType>) => ({
     payload
 })
 
-export const changeOrderCaseCountryData = (payload: OrderCaseType, originalState: Array<CountryDataType>) => ({
-    type: CHANGE_ORDER_CASE_COUNTRY_DATA,
+export const changeDscOrderCaseCountryData = (payload: OrderCaseType, originalState: Array<CountryDataType>) => ({
+    type: CHANGE_DSC_ORDER_CASE_COUNTRY_DATA,
+    payload,
+    originalState
+})
+
+export const changeAscOrderCaseCountryData = (payload: OrderCaseType, originalState: Array<CountryDataType>) => ({
+    type: CHANGE_ASC_ORDER_CASE_COUNTRY_DATA,
     payload,
     originalState
 })
@@ -29,8 +36,9 @@ export const addCountryData = (payload: CountryDataType) => ({
 })
 
 type filteredCountryDataType = ReturnType<typeof filteredCountryData>
-type changeOrderCaseCountryDataType = ReturnType<typeof changeOrderCaseCountryData>
+type changeDscOrderCaseCountryDataType = ReturnType<typeof changeDscOrderCaseCountryData>
+type changeAscOrderCaseCountryDataType = ReturnType<typeof changeAscOrderCaseCountryData>
 type deleteCountryDataType = ReturnType<typeof deleteCountryData>
 type addCountryDataType = ReturnType<typeof addCountryData>
 
-export type FitleredCountryActionsType =  filteredCountryDataType | changeOrderCaseCountryDataType | deleteCountryDataType | addCountryDataType;
+export type FitleredCountryActionsType =  filteredCountryDataType | changeAscOrderCaseCountryDataType | changeDscOrderCaseCountryDataType | deleteCountryDataType | addCountryDataType;

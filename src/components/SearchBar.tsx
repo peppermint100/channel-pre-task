@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setSearchBarText } from '../redux/actions/SearchBarTextActions';
 import _ from "lodash";
 
-const SearchBar = () => {
+const SearchBar:React.FC = () => {
     const dispatch = useDispatch();
 
     // to prevent _.debounce being fired from every time when the input value's state
@@ -13,7 +13,7 @@ const SearchBar = () => {
         _.debounce((text: string) => {
         dispatch(setSearchBarText(text));
         }, 1000),
-        [setSearchBarText]
+        []
     );
 
     return (

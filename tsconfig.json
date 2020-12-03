@@ -13,7 +13,6 @@
     "noEmit": true,
     "jsx": "react",
     "sourceMap": true,
-    "noImplicitReturns": false
   },
   "include": ["src"]
 }
