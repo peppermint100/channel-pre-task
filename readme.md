@@ -20,7 +20,7 @@ Channel Co. Pre-Task
 
 ## Initialization
 ```
-1. git clone https://github.com/peppermint100/channel-pre-task`
+1. git clone https://github.com/peppermint100/channel-pre-task
 2. yarn or npm install
 3. yarn start or npm start
 ```
