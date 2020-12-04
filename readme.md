@@ -46,7 +46,7 @@ Channel Co. Pre-Task
 4. Create and store another deep copied data to filter, search, order
 
 ## Copied Data
- Trying to find matching data directly cause a problem, which happens when user delete or change input value. because redux store lose original API Data(contains whole data). so I needed to store original data in another redux state, then create filtered data state for computing different filter options.
+ Trying to find matching data directly causes a problem, which happens when user delete or change input value. because redux store lose original API Data(contains whole data). so I needed to store original data in another redux state, then create filtered data state for computing different filter options.
 
 ![img2](./img/img2.PNG)
 
@@ -74,7 +74,7 @@ const debounce = useCallback(
 );
  ```
 
-reason that I use `useCallback` here is when input value changes, state get updated. that leads applications to re-render again. which means re-defining whole functions in this component. so if we code debounce like this
+reason that I use `useCallback` here is when input value changes, state get updated. that leads applications to be re-rendered again. which means re-defines whole functions in this component. so if we code debounce like this
 
 ```tsx
 <Field
@@ -90,7 +90,7 @@ reason that I use `useCallback` here is when input value changes, state get upda
 
 ```
 
-it won't work. because original debounce lost it's reference. so I needed to memoize debounce function with `useCallback`
+it won't work. because original debounce lost its reference. so I needed to memoize debounce function with `useCallback`
 
 ## Infinite Scroll
 - memoize observer, `lastItemRef` with `useRef`, `useCallback`
